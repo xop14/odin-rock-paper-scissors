@@ -46,6 +46,7 @@ function game(rounds = 5) {
     let lose = 0;
     let tie = 0;
     for (let i = 0; i < rounds; i++) {
+        playerSelection = prompt("Type 'rock', 'paper', or 'scissors'");
         let result = playRound(playerSelection,computerSelection);
         if (result == "win") {
             win++;
@@ -61,8 +62,8 @@ function game(rounds = 5) {
 }
 
 let computerSelection = getComputerChoice();
-let playerSelection = "paper";
+let playerSelection;
 let roundCount = 1;
 
 // playRound(playerSelection, computerSelection);
-game(50);
+game(5); 
