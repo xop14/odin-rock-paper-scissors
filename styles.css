@@ -2,7 +2,7 @@
     margin: 0%;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    border: 1px solid #fff4;
+    border: 0px solid #fff4;
 }
 body {
     background-color: #b73d3d;
@@ -11,26 +11,29 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    height: 100vh;
+    min-height: 100vh;
     background-image: linear-gradient(to top, #0003 10%, #0000 90%);
 }
 
 h1 {
     margin-bottom: 5px;
     color: #fffc;
-    font-size: 10vw;
+    font-size: 7vw;
 }
+
 h2 {
-    font-size: 1rem;
+    font-size: 3vw;
     font-weight: 300;
-    color: #fff7
+    color: #fff7;
 
 }
 
 header {
+    margin-top: 20px;
     padding-inline: 10%;
     width: 100%;
 }
+
 main {
     width: 100%;
     padding-inline: 10%;
@@ -42,12 +45,49 @@ main {
 .player {
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 .icon {
-    flex: 0 1 40%;
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
+
+img {
+    width: 60px;
+}
+
+#bot-choice {
+    flex: 0 1 auto;
+    width: 100px;
+    aspect-ratio : 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff3;
+    font-size: 60px;
+    font-weight: 900;
+    border-radius: 20px;
+}
+
 .score {
-    flex: 0 1 40%;
+    flex: 1;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 70px;
+    font-weight: 800;
+
+}
+
+#winner {
+    font-size: 30px;
+    font-weight: 800;
+}
+#winner-tag {
+    font-size: 12px;
+    font-weight: 200;
 }
 
 .choices {
@@ -63,6 +103,19 @@ main {
     justify-content: center;
     align-items: center;
     background-color: #fff3;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 30px;
+    border-radius: 20px;
+}
+#start {
+    width: 80%;
+    aspect-ratio : 4 / 1;
+    border-radius: 20px;
+}
+
+.choice:hover {
+    background-color: #fff5;
 }
 
 #results {

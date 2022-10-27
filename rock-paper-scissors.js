@@ -1,3 +1,19 @@
+const botScore = document.querySelector("#bot-score");
+const humanScore = document.querySelector("#human-score");
+const roundNumber = document.querySelector("#round");
+const winner = document.querySelector("#winner");
+const winnerTag = document.querySelector("#winner-tag");
+const botChoice = document.querySelector("#bot-choice");
+const choiceBox = document.querySelector("#human-choices");
+const choiceBtns = document.querySelectorAll(".choice"); // returns array
+
+let win = 0;
+let lose = 0;
+let isRunning = false;
+let roundCount = 1;
+
+//choiceBox.innerHTML = `<div class="choice" id="start">Start</div>`;
+
 function getComputerChoice() {
     // create array of choices
     let compChoices = ["Rock", "Paper", "Scissors"];
@@ -5,65 +21,71 @@ function getComputerChoice() {
     return compChoices[Math.floor(Math.random() * 3)];
 }
 
-function playRound(playerSelection, computerSelection) {
-    // tidy up user input
-    playerSelection = playerSelection.toLowerCase().trim();
-    firstLetter = playerSelection.slice(0, 1).toUpperCase();
-    playerSelection = firstLetter + playerSelection.slice(1);
-
-    // validate user input 
-    if (playerSelection != "Rock" && 
-        playerSelection != "Paper" && 
-        playerSelection != "Scissors") {
-        console.log("Please type rock, paper or scissors");
-        return;
-    }
-
-    console.log(`Round: ${roundCount}`);
+function playRound(playerSelection) {
+    computerSelection = getComputerChoice();
+    botChoice.textContent = computerSelection == "Rock" ? "🪨" : "Paper" ? "📃" : "✂️";
+    roundNumber.textContent = `round ${roundCount}`;
     roundCount++;
 
     // print result to console log
     if (playerSelection == computerSelection) {
-        console.log(`It's a tie! Computer also selected ${computerSelection}`)
-        return "tie";
+        winner.textContent = `Tie...`;
+        winnerTag.textContent = `Bot also selected ${computerSelection}`;
+        return;
     }
     else if (
         (playerSelection == "Rock" && computerSelection == "Scissors") ||
         (playerSelection == "Scissors" && computerSelection == "Paper") ||
         (playerSelection == "Paper" && computerSelection == "Rock")
         ) {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}`)
-        return "win";
+        winner.textContent = `Human...`;
+        winnerTag.textContent = `${playerSelection} beats ${computerSelection}`;
+        win++;
     }
     else {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
-        return "lose";
+        winner.textContent = `Bot...`;
+        winnerTag.textContent = `${computerSelection} beats ${playerSelection}`;
+        lose++;
+    }
+
+    if (win === 5) {
+        isRunning = false;
+        roundNumber.textContent = `Game over`;
+        winner.textContent = `You win!!!`;
+        winnerTag.textContent = `Please play again...`;
+    }
+    if (lose === 5) {
+        isRunning = false;
+        roundNumber.textContent = `Game over!`;
+        winner.textContent = `The bot wins...:(`;
+        winnerTag.textContent = `Better luck next time!`;
     }
 }
 
-function game(rounds = 5) {
-    let win = 0;
-    let lose = 0;
-    let tie = 0;
-    for (let i = 0; i < rounds; i++) {
-        playerSelection = prompt("Type 'rock', 'paper', or 'scissors'");
-        let result = playRound(playerSelection,computerSelection);
-        if (result == "win") {
-            win++;
-        } else if ( result == "lose") {
-            lose++;
-        } else {
-            tie++;
+// detect which button was pressed and return 'Rock', 'Paper' or 'Scissors'
+choiceBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        // reset for next game
+        if (isRunning === false) {
+            win = 0;
+            lose = 0;
+            roundCount = 1;
+            // choiceBox.innerHTML = `
+            // <div class="choice" data-choice="Rock">R</div>
+            // <div class="choice" data-choice="Paper">P</div>
+            // <div class="choice" data-choice="Scissors">S</div>
+            // `;
+            isRunning = true;
         }
-        computerSelection = getComputerChoice();
-    }
-    console.log(`---Results---\n Wins: ${win}\nLoses: ${lose}\n Ties: ${tie}`)
-
-}
+        playerSelection = e.target.getAttribute("data-choice");
+        console.log(playerSelection);
+        playRound(playerSelection);
+        botScore.textContent = lose;
+        humanScore.textContent = win;
+    });
+});
 
 let computerSelection = getComputerChoice();
 let playerSelection;
-let roundCount = 1;
 
-// playRound(playerSelection, computerSelection);
-game(5); 
+console.log(choiceBtns);
