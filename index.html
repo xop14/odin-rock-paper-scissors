@@ -5,8 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, paper, scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>rock, paper, scissors.</h1>
+        <h2>man vs. mac - first to five</h2>
+    </header>
+    <main>
+        <div id="computer" class="player">
+            <div id="computer-icon" class="icon">c-icon</div>
+            <div id="computer-score" class="score">num</div>
+        </div>
+        <div id="computer-choices" class="choices">
+            <div class="choice">R</div>
+            <div class="choice">P</div>
+            <div class="choice">S</div>
+        </div>
+        <div id="results">
+            <div id="round">round num</div>
+            <div id="result">someone wins! x beats y!</div>
+        </div>
+        <div id="human-choices" class="choices">
+            <div class="choice">R</div>
+            <div class="choice">P</div>
+            <div class="choice">S</div>
+        </div>
+        <div id="human" class="player">
+            <div id="human-icon" class="icon">h-icon</div>
+            <div id="human-score" class="score">num</div>
+        </div>
+    </main>
     
     <script src="rock-paper-scissors.js"></script>
 </body>
