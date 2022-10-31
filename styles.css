@@ -2,10 +2,10 @@
     margin: 0%;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    border: 0px solid #fff4;
+    border: 1px solid #fff4;
 }
 body {
-    background-color: #b73d3d;
+    background-color: #1a1a1a;
     color: #fffe;
     display: flex;
     flex-direction: column;
@@ -13,16 +13,15 @@ body {
     gap: 15px;
     min-height: 100vh;
     background-image: linear-gradient(to top, #0003 10%, #0000 90%);
+    perspective: 800px;
 }
 
 h1 {
     margin-bottom: 5px;
     color: #fffc;
-    font-size: 7vw;
 }
 
 h2 {
-    font-size: 3vw;
     font-weight: 300;
     color: #fff7;
 
@@ -30,13 +29,16 @@ h2 {
 
 header {
     margin-top: 20px;
-    padding-inline: 10%;
+    padding-inline: 20px;
     width: 100%;
+    max-width: 1000px;
 }
 
 main {
     width: 100%;
-    padding-inline: 10%;
+    max-width: 1000px;
+    padding-inline: 20px;
+    flex: auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -69,6 +71,7 @@ img {
     font-size: 60px;
     font-weight: 900;
     border-radius: 20px;
+    user-select: none;
 }
 
 .score {
@@ -79,6 +82,37 @@ img {
     font-size: 70px;
     font-weight: 800;
 
+}
+
+.score-lights {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.score-light {
+    height: 25px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    color: #fffa;
+}
+
+.light-off {
+    border: 3px solid #444;
+    background-color: #fff6;
+}
+
+.light-on {
+    border: 3px solid green;
+    background-color: #51ba21;
+    animation-name: color-change;
+    animation-duration: 1s;
+    animation-direction:normal;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 #winner {
@@ -104,10 +138,18 @@ img {
     align-items: center;
     background-color: #fff3;
     cursor: pointer;
+    font-size: 50px;
     font-weight: 900;
-    font-size: 30px;
     border-radius: 20px;
+    user-select: none;
+
 }
+
+@keyframes color-change {
+    0% {background-color: #7cfb41; transform:rotateX(0deg);}
+    100% {background-color: #51ba21; transform:rotateX(360deg);}
+    }
+
 #start {
     width: 80%;
     aspect-ratio : 4 / 1;

@@ -23,7 +23,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection) {
     computerSelection = getComputerChoice();
-    botChoice.textContent = computerSelection == "Rock" ? "🪨" : "Paper" ? "📃" : "✂️";
+    botChoice.textContent = computerSelection == "Rock" ? "🪨" : (computerSelection == "Paper" ? "📃" : "✂️");
     roundNumber.textContent = `round ${roundCount}`;
     roundCount++;
 
@@ -41,11 +41,19 @@ function playRound(playerSelection) {
         winner.textContent = `Human...`;
         winnerTag.textContent = `${playerSelection} beats ${computerSelection}`;
         win++;
+        //human score lights
+        const scoreLight = document.querySelector(`.score-light[data-light-human='${win}']`);
+        scoreLight.classList.toggle("light-off");
+        scoreLight.classList.toggle("light-on");
     }
     else {
         winner.textContent = `Bot...`;
         winnerTag.textContent = `${computerSelection} beats ${playerSelection}`;
         lose++;
+        //bot score lights
+        const scoreLight = document.querySelector(`.score-light[data-light-bot='${lose}']`);
+        scoreLight.classList.toggle("light-off");
+        scoreLight.classList.toggle("light-on");
     }
 
     if (win === 5) {
@@ -70,6 +78,8 @@ choiceBtns.forEach((btn) => {
             win = 0;
             lose = 0;
             roundCount = 1;
+            resetScoreLights();
+            
             // choiceBox.innerHTML = `
             // <div class="choice" data-choice="Rock">R</div>
             // <div class="choice" data-choice="Paper">P</div>
@@ -80,10 +90,21 @@ choiceBtns.forEach((btn) => {
         playerSelection = e.target.getAttribute("data-choice");
         console.log(playerSelection);
         playRound(playerSelection);
-        botScore.textContent = lose;
-        humanScore.textContent = win;
+        // botScore.textContent = lose;
+        // humanScore.textContent = win;
     });
 });
+
+function resetScoreLights() {
+    for (let i = 1; i <=5; i++) {
+        const scoreLightBot = document.querySelector(`.score-light[data-light-bot='${i}']`);
+        const scoreLightHuman = document.querySelector(`.score-light[data-light-human='${i}']`);
+        scoreLightBot.classList.remove("light-on");
+        scoreLightBot.classList.add("light-off");
+        scoreLightHuman.classList.remove("light-on");
+        scoreLightHuman.classList.add("light-off");
+    }
+}
 
 let computerSelection = getComputerChoice();
 let playerSelection;
