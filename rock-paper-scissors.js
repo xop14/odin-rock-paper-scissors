@@ -1,16 +1,19 @@
-const botScore = document.querySelector("#bot-score");
-const humanScore = document.querySelector("#human-score");
 const roundNumber = document.querySelector("#round");
 const winner = document.querySelector("#winner");
 const winnerTag = document.querySelector("#winner-tag");
 const botChoice = document.querySelector("#bot-choice");
 const choiceBox = document.querySelector("#human-choices");
 const choiceBtns = document.querySelectorAll(".choice"); // returns array
+const botTotal = document.querySelector("#bot-total");
+const humanTotal = document.querySelector("#human-total");
+const instructions = document.querySelector("#instructions");
 
 let win = 0;
 let lose = 0;
 let isRunning = false;
 let roundCount = 1;
+let botTotalCount = 0;
+let humanTotalCount = 0;
 
 //choiceBox.innerHTML = `<div class="choice" id="start">Start</div>`;
 
@@ -23,7 +26,22 @@ function getComputerChoice() {
 
 function playRound(playerSelection) {
     computerSelection = getComputerChoice();
-    botChoice.textContent = computerSelection == "Rock" ? "🪨" : (computerSelection == "Paper" ? "📃" : "✂️");
+
+    if (computerSelection == "Rock") {
+        botChoice.innerHTML = `<img src="./images/rock.svg" class="hand" alt="rock">`;
+    }
+    else if (computerSelection == "Paper") {
+        botChoice.innerHTML = `<img src="./images/paper.svg" class="hand" alt="paper">`;
+    }
+    else if (computerSelection == "Scissors") {
+        botChoice.innerHTML = `<img src="./images/scissors.svg" class="hand" alt="scissors">`;
+    }
+    
+    botChoice.classList.add('big');
+    setTimeout(() => {
+        botChoice.classList.remove('big');
+    }, 300);
+
     roundNumber.textContent = `Round ${roundCount}`;
     roundCount++;
 
@@ -38,7 +56,7 @@ function playRound(playerSelection) {
         (playerSelection == "Scissors" && computerSelection == "Paper") ||
         (playerSelection == "Paper" && computerSelection == "Rock")
         ) {
-        winner.textContent = `Human wins round`;
+        winner.textContent = `You win round`;
         winnerTag.textContent = `${playerSelection} beats ${computerSelection}`;
         win++;
         //human score lights
@@ -60,15 +78,34 @@ function playRound(playerSelection) {
         isRunning = false;
         roundNumber.textContent = `Game over`;
         winner.textContent = `You win!`;
-        winnerTag.textContent = `Please play again...`;
+        winnerTag.textContent = `Can you win again?`;
+        instructions.innerHTML = `<i class="fa-solid fa-arrow-down"></i> Play again <i class="fa-solid fa-arrow-down"></i>`;
+        setTimeout(() => {
+            instructions.classList.add('yellow');
+        }, 1000);
+        humanTotalCount++;
+        humanTotal.textContent = `Total games won: ${humanTotalCount}`;
     }
     if (lose === 5) {
         isRunning = false;
         roundNumber.textContent = `Game over!`;
         winner.textContent = `The bot wins...:(`;
         winnerTag.textContent = `Better luck next time!`;
+        instructions.innerHTML = `<i class="fa-solid fa-arrow-down"></i> Play again <i class="fa-solid fa-arrow-down"></i>`;
+        setTimeout(() => {
+            instructions.classList.add('yellow');
+        }, 500);
+        botTotalCount++;
+        botTotal.textContent = `Total games won: ${botTotalCount}`;
     }
 }
+
+// make instructions bounce
+setInterval(() => {
+    instructions.classList.toggle('bounce');
+}, 1500);
+instructions.classList.add('yellow');
+
 
 // detect which button was pressed and return 'Rock', 'Paper' or 'Scissors'
 choiceBtns.forEach((btn) => {
@@ -79,19 +116,15 @@ choiceBtns.forEach((btn) => {
             lose = 0;
             roundCount = 1;
             resetScoreLights();
-            
-            // choiceBox.innerHTML = `
-            // <div class="choice" data-choice="Rock">R</div>
-            // <div class="choice" data-choice="Paper">P</div>
-            // <div class="choice" data-choice="Scissors">S</div>
-            // `;
+            instructions.innerHTML = ``;
+            instructions.classList.remove('bounce', 'yellow');
             isRunning = true;
         }
         playerSelection = e.target.getAttribute("data-choice");
-        console.log(playerSelection);
+        console.log(`*** Round: ${roundCount} ***`)
+        console.log(`Player: ${playerSelection}`);
         playRound(playerSelection);
-        // botScore.textContent = lose;
-        // humanScore.textContent = win;
+        console.log(`Comp:   ${computerSelection}`);
     });
 });
 

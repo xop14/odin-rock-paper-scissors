@@ -8,55 +8,52 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/63fe9be6f5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
-    <header>
-        <h1>rock, paper, scissors.</h1>
-        <h2>first to five: human vs. bot!</h2>
-        <hr>
-    </header>
     <main>
         <div id="bot" class="player">
             <div id="bot-icon" class="icon">
                 <img src="./images/bot.png" alt="human">
             </div>
             <div id="bot-choice">?</div>
-            <!-- <div id="bot-score" class="score">0</div> -->
         </div>
-        <div class="score-lights" id="bot-score-lights">
-            <div class="score-light light-off" data-light-bot="1">1</div>
-            <div class="score-light light-off" data-light-bot="2">2</div>
-            <div class="score-light light-off" data-light-bot="3">3</div>
-            <div class="score-light light-off" data-light-bot="4">4</div>
-            <div class="score-light light-off" data-light-bot="5">5</div>
+        <div id="bot-total" class="total">Total games won: 0</div>
+        <div class="wrapper">
+            <div class="score-lights" id="bot-score-lights">
+                <div class="score-light light-off" data-light-bot="1">1</div>
+                <div class="score-light light-off" data-light-bot="2">2</div>
+                <div class="score-light light-off" data-light-bot="3">3</div>
+                <div class="score-light light-off" data-light-bot="4">4</div>
+                <div class="score-light light-off" data-light-bot="5">5</div>
+            </div>
         </div>
         <div id="results">
-            <div id="round">Let's go!</div>
-            <div id="winner">First to five wins</div>
-            <div id="winner-tag">Good luck</div>
+            <div id="round">Human vs. Bot</div>
+            <div id="winner">Rock, Paper, Scissors</div>
+            <div id="winner-tag">First to five wins!</div>
         </div>
-        <div class="score-lights" id="human-score-lights">
-            <div class="score-light light-off" data-light-human="1">1</div>
-            <div class="score-light light-off" data-light-human="2">2</div>
-            <div class="score-light light-off" data-light-human="3">3</div>
-            <div class="score-light light-off" data-light-human="4">4</div>
-            <div class="score-light light-off" data-light-human="5">5</div>
-        </div>
-        <div id="human-choices" class="choices">
-            <div class="choice" data-choice="Rock">🪨</div>
-            <div class="choice" data-choice="Paper">📃</div>
-            <div class="choice" data-choice="Scissors">✂️</div>
-        </div>
-        <div id="human" class="player">
-            <div id="human-icon" class="icon">
-                <img src="./images/head.png" alt="human" width="50%">
+        <div class="wrapper">
+            <div class="score-lights" id="human-score-lights">
+                <div class="score-light light-off" data-light-human="1">1</div>
+                <div class="score-light light-off" data-light-human="2">2</div>
+                <div class="score-light light-off" data-light-human="3">3</div>
+                <div class="score-light light-off" data-light-human="4">4</div>
+                <div class="score-light light-off" data-light-human="5">5</div>
             </div>
-            <!-- <div id="human-score" class="score">0</div> -->
+        </div>
+        <div id="instructions" class="bounce"><i class="fa-solid fa-arrow-down"></i> Choose to start <i class="fa-solid fa-arrow-down"></i></div>
+        <div id="human-total" class="total">Total games won: 0</div>
+        <div id="human-choices" class="choices">
+            <div class="choice" data-choice="Rock"><img src="./images/rock.svg" class="hand" alt="rock"></div>
+            <div class="choice" data-choice="Paper"><img src="./images/paper.svg" class="hand" alt="paper"></div>
+            <div class="choice" data-choice="Scissors"><img src="./images/scissors.svg" class="hand" alt="scissors"></div>
         </div>
     </main>
     <footer>
-        This game was created by David Green in 2022 using HTML, CSS and JavaScript for the Odin Project's 'Rock, Paper, Scissors' project.
+        This game was created by David Green using HTML, CSS and JavaScript for the Odin Project's 'Rock, Paper, Scissors' assignment.
     </footer>
     
     <script src="rock-paper-scissors.js"></script>
