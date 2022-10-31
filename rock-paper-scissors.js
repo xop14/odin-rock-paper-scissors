@@ -24,13 +24,13 @@ function getComputerChoice() {
 function playRound(playerSelection) {
     computerSelection = getComputerChoice();
     botChoice.textContent = computerSelection == "Rock" ? "🪨" : (computerSelection == "Paper" ? "📃" : "✂️");
-    roundNumber.textContent = `round ${roundCount}`;
+    roundNumber.textContent = `Round ${roundCount}`;
     roundCount++;
 
     // print result to console log
     if (playerSelection == computerSelection) {
-        winner.textContent = `Tie...`;
-        winnerTag.textContent = `Bot also selected ${computerSelection}`;
+        winner.textContent = `Tie`;
+        winnerTag.textContent = `You both selected ${computerSelection}`;
         return;
     }
     else if (
@@ -38,7 +38,7 @@ function playRound(playerSelection) {
         (playerSelection == "Scissors" && computerSelection == "Paper") ||
         (playerSelection == "Paper" && computerSelection == "Rock")
         ) {
-        winner.textContent = `Human...`;
+        winner.textContent = `Human wins round`;
         winnerTag.textContent = `${playerSelection} beats ${computerSelection}`;
         win++;
         //human score lights
@@ -47,7 +47,7 @@ function playRound(playerSelection) {
         scoreLight.classList.toggle("light-on");
     }
     else {
-        winner.textContent = `Bot...`;
+        winner.textContent = `Bot wins round`;
         winnerTag.textContent = `${computerSelection} beats ${playerSelection}`;
         lose++;
         //bot score lights
@@ -59,7 +59,7 @@ function playRound(playerSelection) {
     if (win === 5) {
         isRunning = false;
         roundNumber.textContent = `Game over`;
-        winner.textContent = `You win!!!`;
+        winner.textContent = `You win!`;
         winnerTag.textContent = `Please play again...`;
     }
     if (lose === 5) {
